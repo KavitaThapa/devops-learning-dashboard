@@ -11,9 +11,12 @@ pipeline {
         }  
         stage('Build') {
             steps {
-                echo 'Building Flask application...'
-            }
-        } 
+                sh 'python3 --version'
+                sh 'python3 -m venv venv'
+                sh 'venv/bin/pip install --upgrade pip'
+                sh 'venv/bin/pip install -r requirements.txt'
+             }
+        }
         stage('Test') {
             steps {
                 echo 'Testing Flask application...'
