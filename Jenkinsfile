@@ -27,5 +27,15 @@ pipeline {
                 sh 'docker build -t devops-learning-dashboard .'
             }
         }
+        stage('Docker Run') {
+            steps {
+                sh 'docker run -d --name devops-learning-dashboard -p 5001:5001 devops-learning-dashboard:latest'
+            }
+        }
+        stage('Docker Run') {
+            steps {
+                sh 'docker run -d --name devops-learning-dashboard -p 5001:5001 devops-learning-dashboard:latest'
+            }
+        }
     }
 }
