@@ -19,9 +19,9 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing Flask application...'
-            }
-        }
+                sh 'venv/bin/pytest'
+             }
+        } 
         stage('Docker Build') {
             steps {
                 echo 'Building Docker image...'
