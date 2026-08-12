@@ -38,6 +38,7 @@ pipeline {
             steps {
                 sh 'sleep 5'
                 sh 'curl -f http://localhost:5001'
+                echo 'Application health check passed!'
             }
         }
     }
