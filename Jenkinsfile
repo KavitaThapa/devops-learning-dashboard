@@ -34,5 +34,11 @@ pipeline {
                 sh 'docker run -d --name devops-learning-dashboard -p 5001:5001 devops-learning-dashboard:latest'
             }
         }
+        stage('Health Check') {
+            steps {
+                sh 'sleep 5'
+                sh 'curl -f http://localhost:5001'
+            }
+        }
     }
 }
