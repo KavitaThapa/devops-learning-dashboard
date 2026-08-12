@@ -29,6 +29,8 @@ pipeline {
         }
         stage('Docker Run') {
             steps {
+                sh 'docker stop devops-learning-dashboard || true'
+                sh 'docker rm devops-learning-dashboard || true'
                 sh 'docker run -d --name devops-learning-dashboard -p 5001:5001 devops-learning-dashboard:latest'
             }
         }
