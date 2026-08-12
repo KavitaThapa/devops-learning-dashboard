@@ -28,7 +28,7 @@ A Flask-based web application created to demonstrate my learning and practical i
 
 ## Project Structure
 
-```text
+```
 devops-learning-dashboard/
 │
 ├── app.py
@@ -53,7 +53,7 @@ The project uses Jenkins to automate the CI/CD process.
 
 ### Pipeline Flow
 
-```text
+```
 Developer
     |
     | git push
@@ -99,7 +99,7 @@ Current test result: **3 tests passed**.
 
 ### Run Tests Locally
 
-```bash
+```
 venv/bin/pytest
 ```
 
@@ -109,7 +109,7 @@ The Flask application is containerized using Docker.
 
 ### Build and Run Docker Container
 
-```bash
+```
 docker build -t devops-learning-dashboard .
 docker run -d --name devops-learning-dashboard -p 5001:5001 devops-learning-dashboard:latest
 ```
@@ -123,3 +123,52 @@ The application runs on port `5001`.
 | `/` | Home page |
 | `/about` | About page |
 | `/skills` | Skills page |
+
+## Deployment
+
+The application is deployed on an AWS EC2 instance using Docker and Jenkins.
+
+### Deployment Workflow
+
+```
+GitHub
+   |
+   | Git Push
+   v
+Jenkins
+   |
+   +--> Build
+   +--> Test with Pytest
+   +--> Build Docker Image
+   +--> Run Docker Container
+   +--> Health Check
+   |
+   v
+AWS EC2
+   |
+   v
+Flask Application
+```
+### Docker
+
+- Application containerized using Docker.
+- Docker image is built automatically by Jenkins.
+- Previous container is stopped and removed before deployment.
+- New Docker container is started on port `5001`.
+
+### Jenkins
+
+- Jenkins pipeline is triggered automatically through a GitHub webhook.
+- Pipeline performs source code checkout, application build, automated testing, Docker image build, container deployment, and health check.
+- Deployment is considered successful only after the application health check passes.
+
+### AWS EC2
+
+- Application is deployed on an AWS EC2 worker node.
+- Docker container runs on the EC2 instance.
+- Port `5001` is configured in the EC2 Security Group for external access.
+- The deployed Flask application can be accessed through the EC2 public IP address.
+
+### Deployment Result
+
+The application is successfully deployed and accessible through a web browser after the Jenkins pipeline completes successfully.
